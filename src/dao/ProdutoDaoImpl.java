@@ -22,9 +22,9 @@ import model.Produto;
 public class ProdutoDaoImpl implements ProdutoDAO {
 
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/ca";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/produtos?zeroDateTimeBehavior=convertToNull";
     private static final String ID = "root";
-    private static final String PASS = "";
+    private static final String PASS = "bazinga";
 
     private static final String DELETE = "DELETE FROM produto WHERE id=?";
     private static final String FIND_ALL = "SELECT * FROM produto ORDER BY id";
