@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class ProdutoTableModel extends AbstractTableModel {
 
     private List<Produto> listaProduto = new ArrayList<>();
-    private String[] colunas = new String[]{"Id","Imagem", "Nome", "Preço"};
+    private String[] colunas = new String[]{"Imagem", "Nome", "Preço"};
 
     public ProdutoTableModel() {
     }
@@ -47,7 +47,16 @@ public class ProdutoTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return String.class;
+        
+        switch (columnIndex) {
+            case 0:
+                return byte.class;
+            case 1:
+                return String.class;
+            case 2:
+                return Double.class;
+        }
+        return null;
     }
 
     /**
@@ -65,12 +74,10 @@ public class ProdutoTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return produto.getId();
-            case 1:
                 return produto.getImagem();
-            case 2:
+            case 1:
                 return produto.getNome();
-            case 3:
+            case 2:
                 return produto.getPreco();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -91,10 +98,10 @@ public class ProdutoTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
 
-            case 2:
+            case 1:
                 produto.setNome(aValue.toString());
                 break;
-            case 3:
+            case 2:
                 produto.setPreco(Double.valueOf(aValue.toString()));
                 break;
             default:
@@ -117,7 +124,7 @@ public class ProdutoTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex == 0 || columnIndex == 1){
+        if(columnIndex == 0){
             return false;
         }else{
             return true;
@@ -165,8 +172,5 @@ public class ProdutoTableModel extends AbstractTableModel {
         return listaProduto.isEmpty();
     }
 
-    private void updateProduto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

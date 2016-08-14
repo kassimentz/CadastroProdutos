@@ -39,6 +39,7 @@ public class JFCadastroProdutos extends JFrame{
 
     private void criarJTable() {
         tabela = new JTable(modelo);
+        tabela.setAutoCreateRowSorter(true);
         buscar();
     }
 
@@ -56,7 +57,8 @@ public class JFCadastroProdutos extends JFrame{
         
         getContentPane().add(painelFundo);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 320);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setTitle("Cadastro de Produto - Produtos Cadastrados");
         setVisible(true);
         
         btnNovo.addActionListener(new BtnNovoListener());
@@ -73,10 +75,13 @@ public class JFCadastroProdutos extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFInserirProduto jfNovo = new JFInserirProduto();
-            jfNovo.setVisible(true);
-            
+            abrirCadastro();
         }
+    }
+    
+    private void abrirCadastro(){
+        JDInserirProduto jfNovo = new JDInserirProduto(this, true);
+        jfNovo.setVisible(true);
     }
     
 }
