@@ -117,7 +117,7 @@ public class ProdutoTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex == 0){
+        if(columnIndex == 0 || columnIndex == 1){
             return false;
         }else{
             return true;

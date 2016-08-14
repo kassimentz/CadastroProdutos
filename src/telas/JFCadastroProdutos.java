@@ -73,7 +73,7 @@ public class JFCadastroProdutos extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFNovoProduto jfNovo = new JFNovoProduto(modelo);
+            JFInserirProduto jfNovo = new JFInserirProduto();
             jfNovo.setVisible(true);
             
         }
