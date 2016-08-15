@@ -37,12 +37,20 @@ public class JFCadastroProdutos extends JFrame{
         criarJanela();
     }
 
+    /**
+     * Cria a Jtable
+     */
     private void criarJTable() {
         tabela = new JTable(modelo);
+        //ativa a ordenacao por colunas na tabela
         tabela.setAutoCreateRowSorter(true);
+        //busca os dados do banco
         buscar();
     }
 
+    /**
+     * Cria a janela principal
+     */
     private void criarJanela() {
         
         btnNovo = new JButton("Novo Produto");
@@ -64,6 +72,10 @@ public class JFCadastroProdutos extends JFrame{
         btnNovo.addActionListener(new BtnNovoListener());
     }
 
+    /**
+     * Realiza a busca dos produtos no banco de dados 
+     * e atualiza a tabela.
+     */
     public static void buscar() {
         ProdutoDaoImpl dao = new ProdutoDaoImpl();
         modelo = new ProdutoTableModel(dao.getProdutos());
@@ -83,5 +95,7 @@ public class JFCadastroProdutos extends JFrame{
         JDInserirProduto jfNovo = new JDInserirProduto(this, true);
         jfNovo.setVisible(true);
     }
+    
+    
     
 }
