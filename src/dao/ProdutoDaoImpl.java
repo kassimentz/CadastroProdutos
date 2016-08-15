@@ -22,15 +22,21 @@ import model.Produto;
 public class ProdutoDaoImpl implements ProdutoDAO {
 
     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/produtos?zeroDateTimeBehavior=convertToNull";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/produtos";
     private static final String ID = "root";
     private static final String PASS = "root";
+    private static final String DB_NAME = "produtos";
+    private static final String DATABASE = "CREATE DATABASE IF NOT EXISTS "+DB_NAME;
+    
+    
+    private static final String TB_PRODUTO = "CREATE TABLE IF NOT EXISTS produto (id mediumint(9) NOT NULL PRIMARY KEY AUTO_INCREMENT, nome varchar(200), preco double, imagem blob)";
 
     private static final String DELETE = "DELETE FROM produto WHERE id=?";
     private static final String FIND_ALL = "SELECT * FROM produto ORDER BY id";
     private static final String FIND_BY_ID = "SELECT * FROM produto WHERE id=?";
     private static final String INSERT = "INSERT INTO produto(nome, preco, imagem) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE produto SET nome=?, preco=?, imagem=? WHERE id=?";
+    
 
     /**
      * Deletar um produto buscando por seu ID
@@ -179,6 +185,50 @@ public class ProdutoDaoImpl implements ProdutoDAO {
             close(stmt);
             close(conn);
         }
+    }
+    
+    /**
+     * cria o banco de dados e a tabela se ainda nao existirem
+     */
+    public void iniciaDB(){
+        createDatabase();
+        createTable();
+    }
+    
+    /**
+     * cria o banco de dados
+     */
+    private void createDatabase(){
+        
+        Connection conn = null;
+        
+        try {
+            Class.forName(DRIVER_NAME);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/",ID, PASS);
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(DATABASE);
+            statement.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * cria a tabela
+     */
+    private void createTable(){
+        Connection conn = null;
+        try {
+            Class.forName(DRIVER_NAME);
+            conn = getConnection();
+            Statement statement = conn.createStatement();
+            statement.execute(TB_PRODUTO);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
     }
 
     /**

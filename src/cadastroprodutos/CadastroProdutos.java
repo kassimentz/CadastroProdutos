@@ -5,6 +5,7 @@
  */
 package cadastroprodutos;
 
+import dao.ProdutoDaoImpl;
 import telas.JFCadastroProdutos;
 
 /**
@@ -17,6 +18,8 @@ public class CadastroProdutos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ProdutoDaoImpl dao = new ProdutoDaoImpl();
+        dao.iniciaDB();
         JFCadastroProdutos cadastro = new JFCadastroProdutos();
         cadastro.setVisible(true);
     }
