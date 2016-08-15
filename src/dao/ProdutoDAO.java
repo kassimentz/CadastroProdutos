@@ -10,7 +10,7 @@ import model.Produto;
 
 /**
  *
- * @author kassiane
+ * @author kassi
  */
 public interface ProdutoDAO {
     

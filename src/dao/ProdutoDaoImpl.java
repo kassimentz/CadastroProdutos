@@ -17,7 +17,7 @@ import model.Produto;
 
 /**
  *
- * @author kassiane
+ * @author kassi
  */
 public class ProdutoDaoImpl implements ProdutoDAO {
 
@@ -32,6 +32,11 @@ public class ProdutoDaoImpl implements ProdutoDAO {
     private static final String INSERT = "INSERT INTO produto(nome, preco, imagem) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE produto SET nome=?, preco=?, imagem=? WHERE id=?";
 
+    /**
+     * Deletar um produto buscando por seu ID
+     * @param id
+     * @return o status da operacao
+     */
     public int delete(int id) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -43,7 +48,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
 
             return stmt.executeUpdate();
         } catch (SQLException e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             close(stmt);
@@ -51,10 +55,14 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         }
     }
 
+    /**
+     * Retorna a lista de produtos existentes no banco
+     * @return lista de produtos
+     */
     public List<Produto> getProdutos() {
         Connection conn = null;
         PreparedStatement stmt = null;
-        List<Produto> list = new ArrayList<Produto>();
+        List<Produto> list = new ArrayList<>();
 
         try {
             conn = getConnection();
@@ -71,7 +79,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
                 list.add(produto);
             }
         } catch (SQLException e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             close(stmt);
@@ -81,6 +88,11 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         return list;
     }
 
+    /**
+     * Busca um produto pelo seu id
+     * @param id
+     * @return produto encontrado
+     */
     public Produto findById(int id) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -104,7 +116,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
                 return null;
             }
         } catch (SQLException e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             close(stmt);
@@ -112,6 +123,11 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         }
     }
 
+    /**
+     * insere um produto na base de dados
+     * @param produto
+     * @return o status da operacao
+     */
     public int insert(Produto produto) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -132,7 +148,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
 
             return result;
         } catch (SQLException e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             close(stmt);
@@ -140,6 +155,11 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         }
     }
 
+    /**
+     * Atualiza um produto na base de dados
+     * @param produto
+     * @return o status da operacao
+     */
     public int update(Produto produto) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -154,7 +174,6 @@ public class ProdutoDaoImpl implements ProdutoDAO {
 
             return stmt.executeUpdate();
         } catch (SQLException e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         } finally {
             close(stmt);
@@ -162,33 +181,42 @@ public class ProdutoDaoImpl implements ProdutoDAO {
         }
     }
 
+    /**
+     * realiza a conexao do banco de dados
+     * @return 
+     */
     private Connection getConnection() {
         try {
             Class.forName(DRIVER_NAME);
             return DriverManager.getConnection(DB_URL, ID, PASS);
         } catch (Exception e) {
-            // e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * fecha a conexao do banco de dados
+     * @param con 
+     */
     private static void close(Connection con) {
         if (con != null) {
             try {
                 con.close();
             } catch (SQLException e) {
-                // e.printStackTrace();
                 throw new RuntimeException(e);
             }
         }
     }
 
+    /**
+     * fecha o statement
+     * @param stmt 
+     */
     private static void close(Statement stmt) {
         if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                // e.printStackTrace();
                 throw new RuntimeException(e);
             }
         }

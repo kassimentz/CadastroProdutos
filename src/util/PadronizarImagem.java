@@ -19,7 +19,8 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author kassiane Realiza o redimensionamento da imagem conforme os parâmetros
+ * @author kassi 
+ * Realiza o redimensionamento da imagem conforme os parâmetros
  * imgLargura e imgAltura mantendo a proporcionalidade. Caso a imagem seja menor
  * do que os parâmetros de redimensionamento, a imagem não será redimensionada.
  */

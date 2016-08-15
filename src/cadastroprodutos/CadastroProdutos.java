@@ -9,7 +9,7 @@ import telas.JFCadastroProdutos;
 
 /**
  *
- * @author kassiane
+ * @author kassi
  */
 public class CadastroProdutos {
 

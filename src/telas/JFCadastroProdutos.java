@@ -15,13 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import model.ProdutoTableModel;
-import model.Produto;
-import java.util.List;
-import javax.swing.event.TableModelEvent;
+
 
 /**
  *
- * @author kassiane
+ * @author kassi
  */
 public class JFCadastroProdutos extends JFrame{
     
@@ -95,7 +93,5 @@ public class JFCadastroProdutos extends JFrame{
         JDInserirProduto jfNovo = new JDInserirProduto(this, true);
         jfNovo.setVisible(true);
     }
-    
-    
-    
+ 
 }

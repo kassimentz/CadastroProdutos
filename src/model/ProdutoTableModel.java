@@ -12,11 +12,12 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author kassiane
+ * @author kassi
  */
 public class ProdutoTableModel extends AbstractTableModel {
 
     private List<Produto> listaProduto = new ArrayList<>();
+    //colunas da tabela
     private String[] colunas = new String[]{"Imagem", "Nome", "Preço"};
 
     public ProdutoTableModel() {
@@ -45,6 +46,11 @@ public class ProdutoTableModel extends AbstractTableModel {
         return colunas[columnIndex];
     }
 
+    /**
+     * informa o tipo de dado da coluna
+     * @param columnIndex
+     * @return classe do tipo de dado
+     */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         
@@ -112,6 +118,11 @@ public class ProdutoTableModel extends AbstractTableModel {
         dao.update(produto);
     }
 
+    /**
+     * seta um valor para a linha selecionada
+     * @param prod
+     * @param rowIndex 
+     */
     public void setValueAtRow(Produto prod, int rowIndex) {
         Produto produto = listaProduto.get(rowIndex);
 
@@ -122,6 +133,14 @@ public class ProdutoTableModel extends AbstractTableModel {
         fireTableCellUpdated(rowIndex, 2);
     }
 
+    
+    /**
+     * autoriza a edicao das colunas
+     * a menos que seja a coluna 0
+     * @param rowIndex
+     * @param columnIndex
+     * @return isCellEditable
+     */
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if(columnIndex == 0){
